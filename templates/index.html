@@ -8,55 +8,26 @@
 
     <meta
       name="description"
-      content="Zunit — a universal unit converter for fast, precise conversions across everyday measurements."
+      content="Zunit — a clean, fast, and universal unit converter for everyday measurements, scientific values, and more."
     />
 
-    <meta name="theme-color" content="#f4f3ef" />
+    <meta name="theme-color" content="#242424" />
 
     <title>Zunit — Universal Unit Converter</title>
 
-    <!-- =====================================================
-     THEME INITIALIZATION
-     Prevents a flash of the wrong theme on page load.
-     ===================================================== -->
-
     <script>
       (() => {
-        try {
-          const savedTheme = localStorage.getItem("zunit-theme");
+        const savedTheme = localStorage.getItem("zunit-theme");
 
-          if (
-            savedTheme === "dark" ||
-            (!savedTheme &&
-              window.matchMedia &&
-              window.matchMedia("(prefers-color-scheme: dark)").matches)
-          ) {
-            document.documentElement.classList.add("dark");
-          }
-        } catch (error) {
-          console.warn("Zunit: Theme initialization failed.", error);
+        if (
+          savedTheme === "dark" ||
+          (!savedTheme &&
+            window.matchMedia("(prefers-color-scheme: dark)").matches)
+        ) {
+          document.documentElement.classList.add("dark");
         }
       })();
     </script>
-
-    <!-- =====================================================
-     VERCEL WEB ANALYTICS
-     HTML / vanilla JS integration
-     ===================================================== -->
-
-    <script>
-      window.va =
-        window.va ||
-        function () {
-          (window.vaq = window.vaq || []).push(arguments);
-        };
-    </script>
-
-    <script defer src="/_vercel/insights/script.js"></script>
-
-    <!-- =====================================================
-     STYLESHEET
-     ===================================================== -->
 
     <link
       rel="stylesheet"
@@ -66,9 +37,9 @@
 
   <body>
     <main class="page">
-      <!-- ===================================================
+      <!-- =====================================================
        HEADER
-       =================================================== -->
+       ===================================================== -->
 
       <header class="site-header">
         <a href="/" class="brand" aria-label="Zunit home">
@@ -77,7 +48,7 @@
         </a>
 
         <div class="header-actions">
-          <!-- GitHub / Source -->
+          <!-- Source Code -->
 
           <a
             class="header-link"
@@ -121,122 +92,106 @@
             rel="noopener noreferrer"
             aria-label="Visit Muhammad Hasan Zarif's website"
           >
-            <span class="developer-dot" aria-hidden="true"></span>
-
+            <span class="developer-dot"></span>
             <span>Developer</span>
           </a>
 
           <span class="header-divider" aria-hidden="true"></span>
 
-          <!-- Theme Toggle -->
+          <!-- Theme -->
 
           <button
             class="theme-toggle"
             id="theme-toggle"
             type="button"
             aria-label="Switch to dark mode"
-            title="Switch to dark mode"
+            title="Switch theme"
           >
-            <!-- Sun -->
-
             <svg
               class="theme-icon sun-icon"
               viewBox="0 0 24 24"
               aria-hidden="true"
             >
               <circle cx="12" cy="12" r="4"></circle>
-
               <path d="M12 2v2"></path>
               <path d="M12 20v2"></path>
-
               <path d="m4.93 4.93 1.41 1.41"></path>
-
               <path d="m17.66 17.66 1.41 1.41"></path>
-
               <path d="M2 12h2"></path>
               <path d="M20 12h2"></path>
-
               <path d="m6.34 17.66-1.41 1.41"></path>
-
               <path d="m19.07 4.93-1.41 1.41"></path>
             </svg>
-
-            <!-- Moon -->
 
             <svg
               class="theme-icon moon-icon"
               viewBox="0 0 24 24"
               aria-hidden="true"
             >
-              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79Z"></path>
+              <path
+                d="M21 12.79A9 9 0 1 1 11.21 3
+            7 7 0 0 0 21 12.79Z"
+              ></path>
             </svg>
           </button>
         </div>
       </header>
 
-      <!-- ===================================================
+      <!-- =====================================================
        HERO
-       =================================================== -->
+       ===================================================== -->
 
-      <section class="hero" aria-labelledby="hero-title">
-        <p class="eyebrow">UNIVERSAL UNIT CONVERTER</p>
+      <section class="hero">
+        <p class="eyebrow">PRECISION, WITHOUT THE CLUTTER</p>
 
-        <h1 id="hero-title">
-          PRECISION,
-          <span>WITHOUT THE CLUTTER.</span>
+        <h1>
+          Convert anything.
+          <br />
+          <span>Measure everything.</span>
         </h1>
 
         <p class="hero-copy">
-          Convert anything. Measure everything. A fast, straightforward
-          converter built for everyday calculations.
+          A simple, fast converter for everyday measurements, scientific values,
+          and everything in between.
         </p>
       </section>
 
-      <!-- ===================================================
+      <!-- =====================================================
        CONVERTER
-       =================================================== -->
+       ===================================================== -->
 
       <section class="converter-card" aria-label="Unit converter">
-        <!-- Category + Value -->
+        <!-- Measurement + Value -->
 
         <div class="converter-top">
-          <div class="field">
+          <div class="field category-field">
             <label for="category"> Measurement </label>
 
-            <select
-              id="category"
-              name="category"
-              aria-label="Measurement category"
-            >
-              <option value="">Loading...</option>
-            </select>
+            <select id="category" aria-label="Measurement category"></select>
           </div>
 
-          <div class="field">
+          <div class="field value-field">
             <label for="value"> Value </label>
 
             <input
-              id="value"
-              name="value"
               type="number"
-              inputmode="decimal"
+              id="value"
+              value="1"
               step="any"
-              placeholder="Enter a value"
+              inputmode="decimal"
               autocomplete="off"
               aria-label="Value to convert"
             />
           </div>
         </div>
 
-        <!-- From / Swap / To -->
+        <!-- From + To -->
 
         <div class="conversion-row">
           <div class="field">
             <label for="from-unit"> From </label>
 
-            <select id="from-unit" name="from-unit" aria-label="Convert from">
-              <option value="">Loading...</option>
-            </select>
+            <select id="from-unit" aria-label="Convert from"></select>
           </div>
 
           <button
@@ -246,41 +201,39 @@
             aria-label="Swap units"
             title="Swap units"
           >
-            <span aria-hidden="true"> ⇄ </span>
+            <span aria-hidden="true">↕</span>
           </button>
 
           <div class="field">
             <label for="to-unit"> To </label>
 
-            <select id="to-unit" name="to-unit" aria-label="Convert to">
-              <option value="">Loading...</option>
-            </select>
+            <select id="to-unit" aria-label="Convert to"></select>
           </div>
         </div>
 
         <!-- Result -->
 
         <div class="result-panel" aria-live="polite" aria-atomic="true">
-          <p class="result-label">Result</p>
+          <div class="result-label">Result</div>
 
-          <p class="result-value" id="result">—</p>
+          <div class="result-value" id="result">1</div>
 
-          <p class="result-unit" id="result-unit">Select a unit</p>
+          <div class="result-unit" id="result-unit">Meter</div>
         </div>
       </section>
 
-      <!-- ===================================================
-       QUICK INFO
-       =================================================== -->
+      <!-- =====================================================
+       QUICK INFORMATION
+       ===================================================== -->
 
       <section class="quick-info" aria-label="Zunit information">
         <div class="info-item">
-          <strong id="category-count"> — </strong>
+          <strong id="category-count"> 11 </strong>
 
           <span> categories </span>
         </div>
 
-        <span class="info-divider" aria-hidden="true"></span>
+        <div class="info-divider" aria-hidden="true"></div>
 
         <div class="info-item">
           <strong> Any </strong>
@@ -288,7 +241,7 @@
           <span> direction </span>
         </div>
 
-        <span class="info-divider" aria-hidden="true"></span>
+        <div class="info-divider" aria-hidden="true"></div>
 
         <div class="info-item">
           <strong> Live </strong>
@@ -297,10 +250,6 @@
         </div>
       </section>
     </main>
-
-    <!-- =====================================================
-     JAVASCRIPT
-     ===================================================== -->
 
     <script src="{{ url_for('static', filename='script.js') }}"></script>
   </body>
