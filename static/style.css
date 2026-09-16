@@ -1,11 +1,17 @@
 @import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap");
 
+/* =========================================================
+ROOT
+========================================================= */
+
 :root {
   --charcoal: #242424;
   --charcoal-soft: #343434;
+
   --ink: #171717;
 
   --paper: #f4f3ef;
+
   --surface: #ffffff;
   --surface-soft: #f8f8f6;
 
@@ -15,8 +21,48 @@
   --muted: #777771;
   --muted-light: #a09f98;
 
+  --result-bg: #242424;
+  --result-muted: #aaa9a4;
+
+  --focus-ring: rgba(36, 36, 36, 0.06);
+
   --radius: 14px;
+
+  color-scheme: light;
 }
+
+/* =========================================================
+DARK MODE
+========================================================= */
+
+html.dark {
+  --charcoal: #eeeeeb;
+  --charcoal-soft: #d9d8d3;
+
+  --ink: #f0efeb;
+
+  --paper: #1b1b1b;
+
+  --surface: #252525;
+  --surface-soft: #2b2b2b;
+
+  --line: #3b3b39;
+  --line-dark: #51514d;
+
+  --muted: #9b9a94;
+  --muted-light: #85847e;
+
+  --result-bg: #111111;
+  --result-muted: #9d9c96;
+
+  --focus-ring: rgba(255, 255, 255, 0.07);
+
+  color-scheme: dark;
+}
+
+/* =========================================================
+RESET
+========================================================= */
 
 * {
   box-sizing: border-box;
@@ -26,10 +72,13 @@
 
 html {
   scroll-behavior: smooth;
+  background: var(--paper);
+  transition: background-color 220ms ease;
 }
 
 body {
   min-height: 100vh;
+
   background: var(--paper);
   color: var(--ink);
 
@@ -42,6 +91,10 @@ body {
 
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
+
+  transition:
+    background-color 220ms ease,
+    color 220ms ease;
 }
 
 button,
@@ -59,26 +112,38 @@ button {
   -webkit-tap-highlight-color: transparent;
 }
 
+/* =========================================================
+PAGE
+========================================================= */
+
 .page {
   width: min(1100px, calc(100% - 48px));
+
   margin: 0 auto;
+
   padding: 28px 0 34px;
 }
 
 /* =========================================================
-   HEADER
-   ========================================================= */
+HEADER
+========================================================= */
 
 .site-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
+
   min-height: 52px;
 }
+
+/* -------------------------
+Brand
+------------------------- */
 
 .brand {
   display: inline-flex;
   align-items: center;
+
   gap: 10px;
 
   color: var(--ink);
@@ -95,32 +160,250 @@ button {
   border-radius: 8px;
 
   background: var(--charcoal);
-  color: white;
+  color: var(--paper);
 
   font-size: 15px;
   font-weight: 700;
+
   letter-spacing: -0.04em;
+
+  transition:
+    transform 180ms ease,
+    background-color 220ms ease,
+    color 220ms ease;
+}
+
+.brand:hover .brand-mark {
+  transform: translateY(-1px);
 }
 
 .brand-name {
+  color: var(--charcoal);
+
   font-size: 17px;
   font-weight: 700;
+
   letter-spacing: -0.03em;
-}
 
-.header-label {
-  color: var(--muted);
-
-  font-size: 13px;
-  font-weight: 500;
+  transition: color 220ms ease;
 }
 
 /* =========================================================
-   HERO
-   ========================================================= */
+HEADER ACTIONS
+========================================================= */
+
+.header-actions {
+  display: flex;
+  align-items: center;
+
+  gap: 14px;
+}
+
+.header-link {
+  display: inline-flex;
+  align-items: center;
+
+  gap: 7px;
+
+  color: var(--muted);
+
+  text-decoration: none;
+
+  font-size: 12px;
+  font-weight: 600;
+
+  transition:
+    color 160ms ease,
+    transform 160ms ease;
+}
+
+.header-link:hover {
+  color: var(--ink);
+
+  transform: translateY(-1px);
+}
+
+/* -------------------------
+Header Icons
+------------------------- */
+
+.header-icon {
+  width: 15px;
+  height: 15px;
+
+  flex-shrink: 0;
+
+  transition: transform 220ms ease;
+}
+
+.header-link:hover .github-icon {
+  transform: rotate(-6deg) scale(1.08);
+}
+
+/* -------------------------
+Divider
+------------------------- */
+
+.header-divider {
+  width: 1px;
+  height: 16px;
+
+  background: var(--line);
+
+  transition: background-color 220ms ease;
+}
+
+/* =========================================================
+DEVELOPER INDICATOR
+========================================================= */
+
+.developer-dot {
+  position: relative;
+
+  width: 7px;
+  height: 7px;
+
+  flex-shrink: 0;
+
+  border-radius: 50%;
+
+  background: var(--muted);
+
+  transition:
+    background-color 180ms ease,
+    transform 180ms ease;
+}
+
+.developer-dot::after {
+  content: "";
+
+  position: absolute;
+
+  inset: -3px;
+
+  border: 1px solid transparent;
+
+  border-radius: 50%;
+
+  transition:
+    border-color 180ms ease,
+    transform 220ms ease;
+}
+
+.header-link:hover .developer-dot {
+  background: var(--ink);
+
+  transform: scale(1.1);
+}
+
+.header-link:hover .developer-dot::after {
+  border-color: var(--line-dark);
+
+  transform: scale(1.25);
+}
+
+/* =========================================================
+THEME TOGGLE
+========================================================= */
+
+.theme-toggle {
+  display: grid;
+  place-items: center;
+
+  width: 30px;
+  height: 30px;
+
+  padding: 0;
+
+  border: 1px solid transparent;
+  border-radius: 7px;
+
+  background: transparent;
+  color: var(--muted);
+
+  cursor: pointer;
+
+  transition:
+    color 180ms ease,
+    background-color 180ms ease,
+    border-color 180ms ease,
+    transform 180ms ease;
+}
+
+.theme-toggle:hover {
+  color: var(--ink);
+
+  background: var(--surface);
+
+  border-color: var(--line);
+
+  transform: translateY(-1px);
+}
+
+.theme-toggle:active {
+  transform: translateY(0) scale(0.96);
+}
+
+/* -------------------------
+Theme Icons
+------------------------- */
+
+.theme-icon {
+  width: 15px;
+  height: 15px;
+
+  fill: none;
+
+  stroke: currentColor;
+  stroke-width: 1.7;
+
+  stroke-linecap: round;
+  stroke-linejoin: round;
+
+  transition:
+    transform 260ms ease,
+    opacity 180ms ease;
+}
+
+.moon-icon {
+  display: none;
+}
+
+/* Light mode → Sun */
+
+html:not(.dark) .sun-icon {
+  display: block;
+}
+
+html:not(.dark) .moon-icon {
+  display: none;
+}
+
+/* Dark mode → Moon */
+
+html.dark .sun-icon {
+  display: none;
+}
+
+html.dark .moon-icon {
+  display: block;
+}
+
+.theme-toggle:hover .sun-icon {
+  transform: rotate(20deg);
+}
+
+.theme-toggle:hover .moon-icon {
+  transform: rotate(-12deg);
+}
+
+/* =========================================================
+HERO
+========================================================= */
 
 .hero {
   max-width: 760px;
+
   margin: 105px 0 54px;
 }
 
@@ -131,6 +414,7 @@ button {
 
   font-size: 11px;
   font-weight: 700;
+
   letter-spacing: 0.14em;
 }
 
@@ -138,28 +422,39 @@ button {
   color: var(--charcoal);
 
   font-size: clamp(42px, 6vw, 72px);
+
   line-height: 0.98;
+
   letter-spacing: -0.065em;
+
   font-weight: 700;
+
+  transition: color 220ms ease;
 }
 
 .hero h1 span {
-  color: #8b8a84;
+  color: var(--muted-light);
+
+  transition: color 220ms ease;
 }
 
 .hero-copy {
   max-width: 540px;
+
   margin-top: 26px;
 
   color: var(--muted);
 
   font-size: 16px;
+
   line-height: 1.65;
+
+  transition: color 220ms ease;
 }
 
 /* =========================================================
-   CONVERTER CARD
-   ========================================================= */
+CONVERTER CARD
+========================================================= */
 
 .converter-card {
   padding: 28px;
@@ -167,31 +462,53 @@ button {
   background: var(--surface);
 
   border: 1px solid var(--line);
+
   border-radius: var(--radius);
 
   box-shadow:
     0 1px 2px rgba(0, 0, 0, 0.02),
     0 10px 30px rgba(0, 0, 0, 0.025);
+
+  transition:
+    background-color 220ms ease,
+    border-color 220ms ease,
+    box-shadow 220ms ease;
+}
+
+html.dark .converter-card {
+  box-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.2),
+    0 10px 30px rgba(0, 0, 0, 0.12);
 }
 
 .converter-top {
   display: grid;
+
   grid-template-columns: 1fr 1fr;
+
   gap: 18px;
 }
 
 .conversion-row {
   display: grid;
+
   grid-template-columns: 1fr 46px 1fr;
+
   align-items: end;
+
   gap: 18px;
 
   margin-top: 18px;
 }
 
+/* =========================================================
+FIELDS
+========================================================= */
+
 .field {
   display: flex;
   flex-direction: column;
+
   gap: 9px;
 }
 
@@ -200,8 +517,12 @@ button {
 
   font-size: 11px;
   font-weight: 700;
+
   letter-spacing: 0.06em;
+
   text-transform: uppercase;
+
+  transition: color 220ms ease;
 }
 
 .field input,
@@ -214,6 +535,7 @@ button {
   background: var(--surface-soft);
 
   border: 1px solid var(--line);
+
   border-radius: 9px;
 
   color: var(--charcoal);
@@ -225,7 +547,8 @@ button {
 
   transition:
     border-color 150ms ease,
-    background 150ms ease,
+    background-color 150ms ease,
+    color 150ms ease,
     box-shadow 150ms ease;
 }
 
@@ -233,22 +556,23 @@ button {
   appearance: auto;
 }
 
-.field input:focus,
-.field select:focus {
-  border-color: #999891;
-  background: white;
-
-  box-shadow: 0 0 0 3px rgba(36, 36, 36, 0.05);
-}
-
 .field input:hover,
 .field select:hover {
   border-color: var(--line-dark);
 }
 
+.field input:focus,
+.field select:focus {
+  border-color: #999891;
+
+  background: var(--surface);
+
+  box-shadow: 0 0 0 3px var(--focus-ring);
+}
+
 /* =========================================================
-   SWAP BUTTON
-   ========================================================= */
+SWAP BUTTON
+========================================================= */
 
 .swap-button {
   width: 46px;
@@ -260,14 +584,17 @@ button {
   place-items: center;
 
   border: 1px solid var(--line);
+
   border-radius: 9px;
 
-  background: white;
+  background: var(--surface);
+
   color: var(--charcoal);
 
   transition:
-    background 150ms ease,
+    background-color 150ms ease,
     border-color 150ms ease,
+    color 150ms ease,
     transform 150ms ease;
 }
 
@@ -275,6 +602,7 @@ button {
   display: block;
 
   font-size: 20px;
+
   line-height: 1;
 
   transition: transform 200ms ease;
@@ -282,8 +610,10 @@ button {
 
 .swap-button:hover {
   background: var(--charcoal);
+
   border-color: var(--charcoal);
-  color: white;
+
+  color: var(--paper);
 }
 
 .swap-button:active {
@@ -295,44 +625,56 @@ button {
 }
 
 /* =========================================================
-   RESULT
-   ========================================================= */
+RESULT PANEL
+========================================================= */
 
 .result-panel {
   min-height: 170px;
 
   margin-top: 28px;
+
   padding: 26px 28px;
 
   display: flex;
   flex-direction: column;
+
   justify-content: center;
 
   border-radius: 11px;
 
-  background: var(--charcoal);
+  background: var(--result-bg);
+
   color: white;
+
+  transition:
+    background-color 220ms ease,
+    color 220ms ease;
 }
 
 .result-label {
   margin-bottom: 11px;
 
-  color: #aaa9a4;
+  color: var(--result-muted);
 
   font-size: 11px;
   font-weight: 700;
+
   letter-spacing: 0.1em;
+
   text-transform: uppercase;
 }
 
 .result-value {
   overflow-wrap: anywhere;
 
-  color: white;
+  color: #ffffff;
 
   font-size: clamp(32px, 5vw, 52px);
+
   line-height: 1.05;
+
   font-weight: 600;
+
   letter-spacing: -0.055em;
 
   transition: opacity 100ms ease;
@@ -341,29 +683,36 @@ button {
 .result-unit {
   margin-top: 10px;
 
-  color: #aaa9a4;
+  color: var(--result-muted);
 
   font-size: 14px;
 }
 
 /* =========================================================
-   QUICK INFO
-   ========================================================= */
+QUICK INFORMATION
+========================================================= */
 
 .quick-info {
   display: flex;
+
   align-items: center;
 
   margin-top: 28px;
+
   padding: 21px 24px;
 
   border-top: 1px solid var(--line);
+
   border-bottom: 1px solid var(--line);
+
+  transition: border-color 220ms ease;
 }
 
 .info-item {
   display: flex;
+
   align-items: baseline;
+
   gap: 7px;
 
   flex: 1;
@@ -374,12 +723,16 @@ button {
 
   font-size: 13px;
   font-weight: 700;
+
+  transition: color 220ms ease;
 }
 
 .info-item span {
   color: var(--muted);
 
   font-size: 12px;
+
+  transition: color 220ms ease;
 }
 
 .info-divider {
@@ -387,32 +740,13 @@ button {
   height: 18px;
 
   background: var(--line);
+
+  transition: background-color 220ms ease;
 }
 
 /* =========================================================
-   FOOTER
-   ========================================================= */
-
-.site-footer {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-
-  margin-top: 32px;
-
-  color: var(--muted-light);
-
-  font-size: 11px;
-  font-weight: 500;
-}
-
-.footer-dot {
-  color: var(--line-dark);
-}
-
-/* =========================================================
-   TABLET
-   ========================================================= */
+TABLET
+========================================================= */
 
 @media (max-width: 800px) {
   .page {
@@ -434,8 +768,8 @@ button {
 }
 
 /* =========================================================
-   MOBILE
-   ========================================================= */
+MOBILE
+========================================================= */
 
 @media (max-width: 600px) {
   body {
@@ -449,7 +783,9 @@ button {
     padding-bottom: 24px;
   }
 
-  /* Header */
+  /* -------------------------
+Header
+------------------------- */
 
   .site-header {
     min-height: 44px;
@@ -472,11 +808,43 @@ button {
     font-size: 16px;
   }
 
-  .header-label {
-    display: none;
+  .header-actions {
+    gap: 9px;
   }
 
-  /* Hero */
+  .header-link {
+    gap: 5px;
+
+    font-size: 10px;
+  }
+
+  .header-icon {
+    width: 14px;
+    height: 14px;
+  }
+
+  .header-divider {
+    height: 14px;
+  }
+
+  .developer-dot {
+    width: 6px;
+    height: 6px;
+  }
+
+  .theme-toggle {
+    width: 28px;
+    height: 28px;
+  }
+
+  .theme-icon {
+    width: 14px;
+    height: 14px;
+  }
+
+  /* -------------------------
+Hero
+------------------------- */
 
   .hero {
     margin-top: 62px;
@@ -487,12 +855,15 @@ button {
     margin-bottom: 14px;
 
     font-size: 10px;
+
     letter-spacing: 0.12em;
   }
 
   .hero h1 {
     font-size: clamp(38px, 11.5vw, 54px);
+
     line-height: 1;
+
     letter-spacing: -0.065em;
   }
 
@@ -502,10 +873,13 @@ button {
     margin-top: 18px;
 
     font-size: 14px;
+
     line-height: 1.6;
   }
 
-  /* Converter */
+  /* -------------------------
+Converter
+------------------------- */
 
   .converter-card {
     padding: 16px;
@@ -515,6 +889,7 @@ button {
 
   .converter-top {
     grid-template-columns: 1fr;
+
     gap: 15px;
   }
 
@@ -522,6 +897,7 @@ button {
     grid-template-columns: 1fr;
 
     gap: 12px;
+
     margin-top: 15px;
   }
 
@@ -544,7 +920,9 @@ button {
     font-size: 14px;
   }
 
-  /* Mobile swap */
+  /* -------------------------
+Mobile Swap
+------------------------- */
 
   .swap-button {
     width: 100%;
@@ -557,6 +935,7 @@ button {
 
   .swap-button span {
     font-size: 18px;
+
     transform: rotate(90deg);
   }
 
@@ -564,12 +943,15 @@ button {
     transform: rotate(270deg);
   }
 
-  /* Result */
+  /* -------------------------
+Result
+------------------------- */
 
   .result-panel {
     min-height: 145px;
 
     margin-top: 20px;
+
     padding: 20px;
 
     border-radius: 9px;
@@ -583,23 +965,29 @@ button {
 
   .result-value {
     font-size: clamp(30px, 9vw, 42px);
+
     line-height: 1.08;
   }
 
   .result-unit {
     margin-top: 8px;
+
     font-size: 13px;
   }
 
-  /* Quick info */
+  /* -------------------------
+Quick Info
+------------------------- */
 
   .quick-info {
     margin-top: 22px;
+
     padding: 16px 2px;
   }
 
   .info-item {
     flex-direction: column;
+
     align-items: center;
 
     gap: 3px;
@@ -618,19 +1006,11 @@ button {
   .info-divider {
     height: 22px;
   }
-
-  /* Footer */
-
-  .site-footer {
-    margin-top: 24px;
-
-    font-size: 10px;
-  }
 }
 
 /* =========================================================
-   SMALL PHONES
-   ========================================================= */
+SMALL PHONES
+========================================================= */
 
 @media (max-width: 380px) {
   .page {
@@ -639,6 +1019,7 @@ button {
 
   .hero {
     margin-top: 52px;
+
     margin-bottom: 28px;
   }
 
@@ -661,6 +1042,7 @@ button {
 
   .result-panel {
     min-height: 135px;
+
     padding: 18px;
   }
 
@@ -671,14 +1053,17 @@ button {
 }
 
 /* =========================================================
-   ACCESSIBILITY / REDUCED MOTION
-   ========================================================= */
+ACCESSIBILITY
+========================================================= */
 
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
   *::after {
     scroll-behavior: auto !important;
+
     transition: none !important;
+
+    animation: none !important;
   }
 }
