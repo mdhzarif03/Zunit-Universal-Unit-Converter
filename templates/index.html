@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <meta
+      name="description"
+      content="Zunit — a universal unit converter for length, weight, volume, temperature, time, digital storage and more."
+    />
+
+    <title>Zunit — Universal Unit Converter</title>
+
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}"
+    />
+  </head>
+
+  <body>
+    <main class="page">
+      <header class="site-header">
+        <a href="/" class="brand">
+          <span class="brand-mark">Z</span>
+          <span class="brand-name">Zunit</span>
+        </a>
+
+        <span class="header-label">Universal Unit Converter</span>
+      </header>
+
+      <section class="hero">
+        <p class="eyebrow">PRECISION, WITHOUT THE CLUTTER</p>
+
+        <h1>
+          Convert anything.
+          <br />
+          <span>Measure everything.</span>
+        </h1>
+
+        <p class="hero-copy">
+          A simple, fast converter for everyday measurements, scientific values,
+          and everything in between.
+        </p>
+      </section>
+
+      <section class="converter-card">
+        <div class="converter-top">
+          <div class="field category-field">
+            <label for="category">Measurement</label>
+
+            <select id="category"></select>
+          </div>
+
+          <div class="field value-field">
+            <label for="value">Value</label>
+
+            <input
+              type="number"
+              id="value"
+              value="1"
+              step="any"
+              autocomplete="off"
+            />
+          </div>
+        </div>
+
+        <div class="conversion-row">
+          <div class="field">
+            <label for="from-unit">From</label>
+
+            <select id="from-unit"></select>
+          </div>
+
+          <button
+            class="swap-button"
+            id="swap-button"
+            type="button"
+            aria-label="Swap units"
+            title="Swap units"
+          >
+            <span>↕</span>
+          </button>
+
+          <div class="field">
+            <label for="to-unit">To</label>
+
+            <select id="to-unit"></select>
+          </div>
+        </div>
+
+        <div class="result-panel">
+          <div class="result-label">Result</div>
+
+          <div class="result-value" id="result">1</div>
+
+          <div class="result-unit" id="result-unit">Meter</div>
+        </div>
+      </section>
+
+      <section class="quick-info">
+        <div class="info-item">
+          <strong id="category-count">11</strong>
+          <span>categories</span>
+        </div>
+
+        <div class="info-divider"></div>
+
+        <div class="info-item">
+          <strong>Any</strong>
+          <span>direction</span>
+        </div>
+
+        <div class="info-divider"></div>
+
+        <div class="info-item">
+          <strong>Live</strong>
+          <span>conversion</span>
+        </div>
+      </section>
+
+      <footer class="site-footer">
+        <span>Zunit</span>
+        <span class="footer-dot">·</span>
+        <span>Universal Unit Converter</span>
+      </footer>
+    </main>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+  </body>
+</html>
